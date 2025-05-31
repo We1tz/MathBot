@@ -1,5 +1,4 @@
 import httpx
-import logging
 import json
 from config import AI_TOKEN, OPENROUTER_URL
 
@@ -13,7 +12,6 @@ HEADERS = {
 }
 
 async def ai_chat(message: str, model: str = "mistralai/mistral-7b-instruct:free") -> str:
-
     body = {
         "model": model,
         "messages": [
@@ -37,8 +35,8 @@ async def ai_chat(message: str, model: str = "mistralai/mistral-7b-instruct:free
             data = response.json()
             return data["choices"][0]["message"]["content"].strip()
     except httpx.HTTPStatusError as e:
-        logging.error(f"Ошибка от OpenRouter: {e.response.status_code} — {e.response.text}")
+        print("Ошибка от OpenRouter:", repr(f"{e.response.status_code} — {e.response.text}"))
         return f"Ошибка от OpenRouter: {e.response.status_code} — {e.response.text}"
     except Exception as e:
-        logging.error(f"Ошибка запроса: {str(e)}")
-        return f"Ошибка запроса: {str(e)}"
+        print("Ошибка запроса:", repr(e))
+        return f"Ошибка запроса: {e}"

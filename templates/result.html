@@ -5,31 +5,12 @@
     <title>Решение задачи</title>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script id="MathJax-script" async
-        src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-    <style>
-    body {
-        font-family: Arial, sans-serif;
-        max-width: 800px;
-        margin: 20px auto;
-        line-height: 1.6;
-    }
-    h1, h2, h3 {
-        margin-top: 1.2em;
-        margin-bottom: 0.5em;
-    }
-    ol {
-        padding-left: 1.2em;
-    }
-    .math-block {
-        text-align: center;
-        margin: 20px 0;
-    }
-</style>
+            src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>{{ styles|safe }}</style>
 </head>
 <body>
     <h1>Решение задачи</h1>
-    <ol><p>Задача: Найти предел функции, при котором аргумент стремится к бесконечности.
-
-Решение:</p><li>Определим функцию, для которой ищем предел при бесконечном аргументе.</li></ol><div class="math-block">$$f(n) = \frac{n^2 + 3n + 2}{n}$$</div><ol><li>Выполним деление на n.</li></ol><div class="math-block">$$f(n) = n + \frac{3n}{n} + \frac{2}{n}$$</div><ol><li>Оценим члены, которые делятся на n.</li></ol><div class="math-block">$$f(n) = n + 3 + \frac{2}{n}$$</div><ol><li>Теперь убедимся, что при бесконечном n, член</li></ol>$\frac{2}{n}$<ol><p>стремится к 0, поскольку он имеет отрицательную степень.</p><li>Теперь оставляем только первый член.</li></ol><div class="math-block">$$f(n) = n$$</div><p>Окончательный ответ: Предел функции</p>$f(n) = \frac{n^2 + 3n + 2}{n}$<p>при бесконечном аргументе равен бесконечности.</p><div class="math-block">$$ \lim_{n \to \infty} f(n) = \infty $$</div>
+    <div>{{ result|safe }}</div>
+    <p><a href="/">← Назад</a></p>
 </body>
 </html>

@@ -1,7 +1,7 @@
 import asyncio
 import re
 from html import escape
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, make_response
 from Model.model import ai_chat
 
 app = Flask(__name__)
@@ -62,9 +62,18 @@ def format_result_with_latex(result: str) -> str:
 def index():
     if request.method == 'POST':
         user_input = request.form.get('task')
-        result = asyncio.run(ai_chat(user_input))
+        try:
+            result = asyncio.run(ai_chat(user_input))
+        except Exception as e:
+            result = f"Ошибка запроса: {repr(e)}"
+
         formatted_result = format_result_with_latex(result)
-        return render_template('result.html', result=formatted_result, styles=HTML_STYLES)
+        response = make_response(render_template('result.html', result=formatted_result, styles=HTML_STYLES))
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+        return response
+
     return render_template('index.html')
 
 if __name__ == "__main__":
